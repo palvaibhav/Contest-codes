@@ -26,7 +26,7 @@ int main()
         for(int i = 0; i < n; i++){
             int num;
             scanf("%d", &num);
-            //In this problem for charlie to win the count of 2s in the input data set must be odd.
+            //In this problem for charlie to win the count of 2s in the input dataset considering only the even numbers  must be odd.
             while(!(num&1)){
                 cnt++;
                 num /= 2;
