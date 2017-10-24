@@ -30,10 +30,10 @@ const int INT_SIZE = 32; // change this and Integer type in Binary Trie class ac
 
 class Node {
 public:
-	Node* arr[2];
+	Node* child[2];
 	Node() {
-		this->arr[0] = NULL;
-		this->arr[1] = NULL;
+		this->child[0] = NULL;
+		this->child[1] = NULL;
 	}
 };
 
@@ -46,13 +46,13 @@ private:
 		if (lvl == -1)
 			return root;
 		bool bit = num & (1 << lvl);
-		if (root->arr[bit] == NULL) {
-			root->arr[bit] = new Node();
-			root->arr[bit] = insertUtil(root->arr[bit], num, lvl - 1);
+		if (root->child[bit] == NULL) {
+			root->child[bit] = new Node();
+			root->child[bit] = insertUtil(root->child[bit], num, lvl - 1);
 			return root;
 		}
 		else {
-			root->arr[bit] = insertUtil(root->arr[bit], num, lvl - 1);
+			root->child[bit] = insertUtil(root->child[bit], num, lvl - 1);
 			return root;
 		}
 	}
@@ -61,13 +61,13 @@ private:
 		if (lvl == -1) 
 			return curRes;
 		bool bit = num & (1 << lvl);
-		if (root->arr[!bit] != NULL) {
+		if (root->child[!bit] != NULL) {
 			if (!bit) curRes = curRes | (1 << lvl);
-			return queryUtil(root->arr[!bit], num, curRes, lvl - 1);
+			return queryUtil(root->child[!bit], num, curRes, lvl - 1);
 		}
 		else {
 			if (bit) curRes = curRes | (1 << lvl);
-			return queryUtil(root->arr[bit], num, curRes, lvl - 1);
+			return queryUtil(root->child[bit], num, curRes, lvl - 1);
 		}
 	}
 
