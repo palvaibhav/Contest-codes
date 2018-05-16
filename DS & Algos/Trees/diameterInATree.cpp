@@ -1,8 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define sz(o) ((int)o.size())
+#define all(o) o.begin(), o.end()
+#define rep(i, a, b) for(int i = (a); i <= (b); i++)
+#define repr(i, a, b) for(int i = (a); i >= (b); i--)
+
+typedef long long int ll;
+typedef vector<ll> vll;
+typedef vector<int> vi;
+
 const int maxn = 10010;
-vector<int> AdjList[maxn];
+vi adj[maxn];
 vector<bool> vis;
 int n;
 
@@ -10,8 +19,7 @@ int n;
 int findDiameterUsingDFS(int u, int pa, int& dia) {
 	int largestChildDepth = -1, secondLargestChildDepth = -1, maxDepth = -1;
 
-	for (int i = 0; i < AdjList[u].size(); i++) {
-		int v = AdjList[u][i];
+	for (int v : adj[u]) {
 		if (v == pa) continue;
 		int depth = findDiameterUsingDFS(v, u, dia);
 		maxDepth = max(maxDepth, depth);
@@ -40,8 +48,7 @@ pair<int, int> BFS(int start) {
 			maxDis = u.second;
 			node = u.first;
 		}
-		for (int i = 0; i < AdjList[u.first].size(); i++) {
-			int v = AdjList[u.first][i];
+		for (int v : adj[u.first]) {
 			if (vis[v]) continue;
 			q.push({v, u.second + 1});
 		}
@@ -69,8 +76,8 @@ int main() {
 	for (int i = 1; i < n; i++) {
 		int u, v;
 		cin >> u >> v;
-		AdjList[u].push_back(v);
-		AdjList[v].push_back(u);
+		adj[u].push_back(v);
+		adj[v].push_back(u);
 	}
 
 	//int dia = 0;
