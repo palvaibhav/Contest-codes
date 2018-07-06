@@ -10,16 +10,16 @@ typedef long long int ll;
 typedef vector<ll> vll;
 typedef vector<int> vi;
 
-const int maxn = 1e5+5;
-int bit[maxn], n;
+const int N = (int)1e5+5;
+int bit[N], n;
 
-void update(int idx, int val){
-    for(; idx <= n; idx += (idx & -idx)) bit[idx] += val;
+void update(int i, int x){
+    for(; i <= n; i += (i & -i)) bit[i] += x;
 }
 
-int sum(int idx){
+int sum(int i){
     int res = 0;
-    for(; idx > 0; idx -= (idx & -idx)) res += bit[idx];
+    for(; i > 0; i -= (i & -i)) res += bit[i];
     return res;
 }
 
